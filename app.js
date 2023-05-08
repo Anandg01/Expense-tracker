@@ -5,12 +5,15 @@ const bodyParser=require('body-parser')
 const cors=require('cors')
 const app=express();
 
+const expanceRout=require('./router/expance')
+
 app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/user',userRout)
+app.use(expanceRout)
 app.use((req, res)=>{
     res.send(`<h1>Not a page</h1>`)
 })

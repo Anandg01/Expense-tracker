@@ -15,6 +15,8 @@ const validate= await axios.post(`http://localhost:2000/user/login`,loginDetails
      throw new Error('Password Does not matched')
      }
      else{
+        
+        window.location.href='./index.html'
         alert(validate.data.message)
      }
     }
