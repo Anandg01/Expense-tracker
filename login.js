@@ -8,11 +8,15 @@ async function login(e){
     }
 const validate= await axios.post(`http://localhost:2000/user/login`,loginDetails)
     console.log(validate.data)
-    console.log(validate.status)
-     alert(validate.data.message)
+     if(validate.status===401){
+     throw new Error('Password Does not matched')
+     }
+     else{
+        alert(validate.data.message)
+     }
     }
     catch(err){
-        alert('This Email id is not registered')
+        //alert('This Email id is not registered')
        document.getElementById('validate').innerHTML=`<p style="color:red;">${err}</p>`
     }
 }

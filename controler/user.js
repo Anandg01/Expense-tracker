@@ -31,10 +31,10 @@ try{
         res.status(201).json({message:"Successful loged in"})
     }
     else{
-        res.status(202).json({message:"Password does not matched"})
+        res.status(401).json({message:"Password does not matched"})
     }
 }
 catch(err){
-    res.status(303).json({message:"Email does not exits"})
+    res.status(404).json({message:"Email does not exits"})
 }
 }
