@@ -6,6 +6,9 @@ async function login(e){
         email:e.target.email.value,
        password:e.target.password.value
     }
+  //  document.getElementById('email').value='';
+   // document.getElementById('password').value='';
+
 const validate= await axios.post(`http://localhost:2000/user/login`,loginDetails)
     console.log(validate.data)
      if(validate.status===401){
@@ -17,6 +20,6 @@ const validate= await axios.post(`http://localhost:2000/user/login`,loginDetails
     }
     catch(err){
         //alert('This Email id is not registered')
-       document.getElementById('validate').innerHTML=`<p style="color:red;">${err}</p>`
+       document.getElementById('validate').innerHTML=`<p style="color:red;">${err.message}</p>`
     }
 }

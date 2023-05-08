@@ -1,6 +1,6 @@
 const user=require('../models/user')
 const { use } = require('../router/user')
-
+const bcrypt=require('bcrypt')
 exports.getData=(req, res)=>{
     user.findAll()
     .then(data=>{
@@ -9,32 +9,36 @@ exports.getData=(req, res)=>{
     .catch(()=>console.log(err))
 }
 
-exports.postData=(req, res)=>{
-    const userDetails=req.body;
-    console.log(userDetails)
-    user.create(userDetails).then(resopnce=>{
-      res.status(201)
-        res.json({messsage:'Successfuly new user created'})
-    })
-    .catch((err)=>{
+exports.postData =async (req, res)=>{
+    const {name, email, password}=req.body;
+    console.log('password=', password)
+    try{
+     const hash= await bcrypt.hash(password,10)
+    await user.create({name, email,password:hash})
+    res.status(201).json({ message: 'Successfully created new user' });
+     }
+    catch(err){
         console.log('err occurced')
-        res.status(303)
-        res.send(err)
-    })
+        res.status(303).json({ message: 'An error occurred while creating the user' });
+    }
 }
 
 exports.login=async (req, res)=>{
-    const loginData=req.body;
+    const {email, password}=req.body;
+    console.log('password', password)
 try{
-    const User= await user.findAll({where:{email:loginData.email}})
-    if(User[0].password===loginData.password){
-        res.status(201).json({message:"Successful loged in"})
+    const User= await user.findAll({where:{email}})
+    const hash=User[0].password;
+    if(!User){
+        return res.status(201).json({ message: 'User not found' });
     }
-    else{
-        res.status(401).json({message:"Password does not matched"})
-    }
+    const isMatch = await bcrypt.compare(password, hash);
+if(!isMatch){
+    return res.status(401).json({ message: 'Invalid password' });
+}
+res.status(200).json({ message: 'Login successful' });
 }
 catch(err){
-    res.status(404).json({message:"Email does not exits"})
+    res.status(404).json({ message: 'An error occurred while logging in' });
 }
 }
