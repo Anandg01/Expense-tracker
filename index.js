@@ -1,20 +1,22 @@
+const token=localStorage.getItem('token')
 function addexpance(e){
     e.preventDefault();
     console.log(e.target.Description.value)
     const expanceDetais={
         expAmount:e.target.expanceAmount.value,
         description:e.target.Description.value,
-        catagory:e.target.catagory.value
+        catagory:e.target.catagory.value,
+        userId:1
     }
   console.log(expanceDetais)
   //showOncreen(expanceDetais)
-  const validate=  axios.post(`http://localhost:2000/addExpance`,expanceDetais)
+const validate=axios.post(`http://localhost:2000/addExpance `,expanceDetais,{headers:{'Authorizan':token}})
   .then(res=>{
    console.log(res.data)
    showOncreen(res.data) 
   })
   .catch(err=>{
-console.log(err)
+ //console.log(err)
   })
 }
 
@@ -26,13 +28,22 @@ function showOncreen(obj){
 }
 
 function deleteClick(id){
-    console.log(id)
+    axios.delete(`http://localhost:2000/deleteExp/${id}`)
+    .then(data=>{
+     removeOnscreen(data.data.id)
+    })
+  .catch(err=>console.log(err))
+}
+
+function removeOnscreen(id){
+   const tr=document.getElementById(id)
+   tr.parentNode.removeChild(tr)
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-    axios.get(`http://localhost:2000/allExpance`)
+  console.log(token)
+    axios.get(`http://localhost:2000/allExpance`,{headers:{'Authorizan':token}})
     .then(res=>{
-        console.log(res.data)
         const data=res.data;
         data.forEach(element=>{
             showOncreen(element)

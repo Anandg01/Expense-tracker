@@ -17,6 +17,8 @@ const validate= await axios.post(`http://localhost:2000/user/login`,loginDetails
      else{
         
         window.location.href='./index.html'
+        console.log(validate.data.userId)
+        localStorage.setItem('token',validate.data.token)
         alert(validate.data.message)
      }
     }
