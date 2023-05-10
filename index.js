@@ -45,7 +45,24 @@ function removeOnscreen(id){
 }
 
 function addPremium(){
-  document.getElementById('premium').innerHTML=`<h4>Premium User</h4>`
+  document.getElementById('premium').innerHTML=`<h4>Premium User</h4>
+   <button id="leaderbtn" onclick="leaderBoard()">LeaderBoard</button>`
+}
+
+function leaderBoard(){
+  axios.get('http://localhost:2000/leaderbord').then(res=>{
+    document.getElementById('ledtit').innerHTML='LeaderBoard'
+  res.data.forEach(data=>{
+    addleaderboard(data)
+  })
+  })
+  .catch(err=>console.log(err))
+  }
+
+function addleaderboard(obj){
+  const prNode=document.getElementById('leader');
+  const li=`<li>Name- ${obj.name}, Total Expance :${obj.totalexpance} </li>`
+  prNode.innerHTML+=li;
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
