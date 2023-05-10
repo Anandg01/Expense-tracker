@@ -4,7 +4,6 @@ const User=require('../models/user')
   exports.authenticate= (req, res, next)=>{
    try{
    const token=req.header('Authorizan');
-   console.log(token)
    const decodeToken=(jwt.verify(token,'854215f63ef23342'))
    User.findByPk(decodeToken.userId).then(user=>{
     req.user=user;

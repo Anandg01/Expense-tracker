@@ -7,7 +7,7 @@ const app=express();
 
 const User=require('./models/user')
 const Expance=require('./models/expance')
-
+const order=require('./models/orders')
 const expanceRout=require('./router/expance')
 
 app.use(cors())
@@ -23,6 +23,9 @@ app.use((req, res)=>{
 
 User.hasMany(Expance);
 Expance.belongsTo(User)
+
+User.hasMany(order);
+order.belongsTo(User);
 
 sequelize
 .sync()
