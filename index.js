@@ -61,7 +61,7 @@ function leaderBoard(){
 
 function addleaderboard(obj){
   const prNode=document.getElementById('leader');
-  const li=`<li>Name- ${obj.name}, Total Expance :${obj.totalexpance} </li>`
+  const li=`<li>Name- ${obj.name}, Total Expance :${obj.totalcast} </li>`
   prNode.innerHTML+=li;
 }
 

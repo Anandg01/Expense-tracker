@@ -1,27 +1,30 @@
 const Expance=require('../models/expance')
 const User=require('../models/user');
+const sequelize = require('../util/database');
 let total=0;
 let arr=[];
 
 exports.groupBydata = async (req, res) => {
     const allUserExpa=[]
     try {
-      const users = await User.findAll();
-  
-      const result =[]
-      for (const user of users) {
-        let toatal=0;
-        const expenses = await Expance.findAll({ where: { userId: user.id } });
-   for( const expense of expenses){
-      toatal=toatal+expense.expAmount;
-   }
-allUserExpa.push({id:user.id,name:user.name,totalexpance:toatal})
-    }
-    allUserExpa.sort((a, b) => b.totalexpance - a.totalexpance);
-    res.send(allUserExpa);
-    } catch (err) {
+     const users=await User.findAll({
+        attributes:['id','name',[sequelize.fn('sum',sequelize.col('expances.expAmount')),'totalcast']],
+        include:[{model:Expance, attributes:[]}],
+        group:['User.id']
+      })
+
+ const expances=await Expance.findAll({
+  attributes:['userId',[sequelize.fn('sum',sequelize.col('Expance.expAmount')),'totalcast']],
+  group: ['userId']
+ })
+ users.sort((a, b) => b.dataValues.totalcast - a.dataValues.totalcast);
+
+  res.json(users)
+   } catch (err) {
       console.error(err);
-      res.status(500).send('An error occurred');
+      res.status(500).send(err);
     }
   };
   
+  
+ 
