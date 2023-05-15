@@ -3,7 +3,7 @@ const User=require('../models/user');
 const sequelize = require('../util/database');
 let total=0;
 let arr=[];
-
+/*
 exports.groupBydata = async (req, res) => {
     const allUserExpa=[]
     try {
@@ -26,5 +26,18 @@ exports.groupBydata = async (req, res) => {
     }
   };
   
-  
+  */
+
+  exports.groupBydata=async(req, res)=>{
+     try{
+      const users=await User.findAll({attributes:['name','totalexpance']})
+      users.sort((a, b) => b.dataValues.totalexpance - a.dataValues.totalexpance);
+      res.json(users)
+     }
+     catch(err){
+      console.error(err);
+      res.status(500).send(err);
+     }
+   
+  }
  

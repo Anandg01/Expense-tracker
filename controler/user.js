@@ -52,3 +52,4 @@ catch(err){
     res.status(404).json({ message: 'An error occurred while logging in' });
 }
 }
+
