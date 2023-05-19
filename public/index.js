@@ -1,6 +1,8 @@
 
 const token=localStorage.getItem('token')
 const premium=localStorage.getItem('premimum')
+
+const pagination=document.getElementById('pagination')
 function addexpance(e){
     e.preventDefault();
     console.log(e.target.Description.value)
@@ -62,6 +64,7 @@ function addleaderboard(obj){
   const li=`<li>Name- ${obj.name}, Total Expance :${obj.totalexpance} </li>`
   prNode.innerHTML+=li;
 }
+// show all expance when reset
 
 document.addEventListener('DOMContentLoaded',()=>{
   if(premium==='true'){
@@ -71,12 +74,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(!token){
     window.location.href='./login.html';
   }
-    axios.get(`http://localhost:2000/allExpance`,{headers:{'Authorizan':token}})
+    axios.get(`http://localhost:2000/allExpance?page=1`,{headers:{'Authorizan':token}})
     .then(res=>{
-        const data=res.data;
-        data.forEach(element=>{
+        const expance=res.data;
+        console.log(expance.total)
+      expance.data.forEach(element=>{
             showOncreen(element)
         })
+        console.log(expance)
+        showpagination(expance)
     })
     .catch(err=>console.log(err))
 })
@@ -145,6 +151,56 @@ function download(){
   });
 }
 
+
 function showError(err){
   document.body.innerHTML += `<div style="color:red;"> ${err}</div>`
+}
+
+function downloadAll(){
+ 
+  axios.get('http://localhost:2000/allFileurl', { headers: {"Authorizan" : token} })
+  .then(fileurl=>{
+    const ul= document.getElementById('listof-file')
+    fileurl.data.forEach(data=>{
+      const li=`<l1 id=${data.id} ><a href="${data.fileURL}">${data.id} </a>Expences</l1>`
+     ul.innerHTML+=li;
+    })
+  })
+
+
+}
+
+function showpagination({prevPage, currentPage, nextPage}){
+  pagination.innerHTML=''
+  console.log(prevPage, currentPage, nextPage)
+  if(prevPage){
+const btn2=document.createElement('button')
+btn2.innerHTML=prevPage
+btn2.addEventListener('click',()=>getProducts(prevPage))
+pagination.appendChild(btn2)
+  }
+  const btn1=document.createElement('button')
+btn1.innerHTML=`<h1>${currentPage} </h1>`
+btn1.addEventListener('click',()=>getProducts(currentPage))
+pagination.appendChild(btn1)
+if(nextPage){
+  const btn3=document.createElement('button')
+btn3.innerHTML=nextPage
+btn3.addEventListener('click',()=>getProducts(nextPage))
+pagination.appendChild(btn3)
+}
+
+}
+
+function getProducts(page){
+  axios.get(`http://localhost:2000/allExpance?page=${page}`,{headers:{'Authorizan':token}})
+  .then(res=>{
+      const expance=res.data;
+      console.log(expance.perPage)
+     expance.data.forEach((obj)=>{
+      showOncreen(obj)
+     })
+      showpagination(expance)
+  })
+  .catch(err=>console.log(err))
 }

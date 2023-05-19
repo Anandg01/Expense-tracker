@@ -12,4 +12,5 @@ rout.get('/premium',userautenticat.authenticate,purcase.premiumParchase)
 rout.post('/updatetransastion',userautenticat.authenticate,purcase.updatrastionStatus)
 rout.get('/leaderbord',prem.groupBydata)
 rout.get('/download',userautenticat.authenticate,expanceControler.download)
+rout.get('/allFileurl',userautenticat.authenticate,expanceControler.allFileurl)
 module.exports=rout;

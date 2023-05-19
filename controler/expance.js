@@ -3,14 +3,32 @@ const User=require('../models/user')
 const FileUrlTable=require('../models/downloadFileurl')
 const sequelize=require('../util/database')
 const s3Service=require('../services/s3services')
+
+
 exports.getData= (req, res)=>{
   const id=req.user.id;
+  const page = parseInt(req.query.page) || 1;
+  const perPage = parseInt(req.query.perPage) || 5;
+  const startIndex = (page - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  
+  console.log(page, perPage, endIndex)
+
   Expance.findAll({where:{userId:id}})
   .then(data=>{
-    res.json(data)
+    const paginatedExpenses=data.slice(startIndex, endIndex)
+    res.json({
+      prevPage:page-1,
+      currentPage:page,
+      nextPage:page+1,
+      perPage,
+      total: data.length,
+      data: paginatedExpenses
+    });
   })
   .catch(err=>console.log(err))
 }
+
 
 function validString(string){
   if(string==undefined||string.length===0){
@@ -100,4 +118,11 @@ console.log(user.id)
 
   }
 
+}
+
+
+exports.allFileurl= async(req, res)=>{
+ const userId=req.user.id;
+ const allfile= await FileUrlTable.findAll({where:{userId:userId}})
+ res.send(allfile)
 }
