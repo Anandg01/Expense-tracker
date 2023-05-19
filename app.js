@@ -11,12 +11,11 @@ const Expance=require('./models/expance')
 const order=require('./models/orders')
 const expanceRout=require('./router/expance')
 const Forgotpassword=require('./models/resetpassword')
+const fileUrl=require('./models/downloadFileurl')
 app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static('views'));
 
 
 app.use('/user',userRout)
@@ -35,6 +34,9 @@ order.belongsTo(User);
 
 User.hasMany(Forgotpassword)
 Forgotpassword.belongsTo(User)
+
+User.hasMany(fileUrl)
+fileUrl.belongsTo(User)
 
 sequelize
 .sync()

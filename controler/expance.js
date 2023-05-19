@@ -1,7 +1,8 @@
 const Expance=require('../models/expance')
 const User=require('../models/user')
+const FileUrlTable=require('../models/downloadFileurl')
 const sequelize=require('../util/database')
-
+const s3Service=require('../services/s3services')
 exports.getData= (req, res)=>{
   const id=req.user.id;
   Expance.findAll({where:{userId:id}})
@@ -76,4 +77,27 @@ exports.removeExpance=async (req, res)=>{
       console.log(err)
       return res.status(404).json({success:false,message:'somthing went wrong'})
     }
+}
+
+exports.download= async (req, res)=>{
+  const user=req.user;
+
+  try{
+  const expance= await user.getExpances()
+  const stringExpance=JSON.stringify(expance)
+console.log(user.id)
+  const userid=user.id;
+
+  const fileName=`Expense${userid}/${new Date()}.txt`;
+  const fileURL=await s3Service.uploadToS3(stringExpance,fileName);
+  await FileUrlTable.create({fileURL:fileURL,userId:userid})
+
+  res.status(201).json({fileURL,success:true})
+
+  }
+  catch(err){
+    res.status(401).json({err,success:false})
+
+  }
+
 }

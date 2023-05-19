@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>SignUP</title>
+   <link rel="stylesheet" href="../public/signmain.css">
+</head>
+<body>
+
+   
+
+   <div class="container">
+    <div class="item item1">
+        <h1 style="text-align: center;">Registerd  Yourself</h1>
+        <form onsubmit="SignUp(event)" class="form-container">
+            <input class="form-input fitem2" type="text" id="userName" name="name" required placeholder="Enter Your name">
+            <input class="form-input fitem2" type="email"  id="email" name="email" required placeholder="Email">
+            <input class="form-input fitem2" type="password" id="password" name="password" required placeholder="Password">
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+<div class="item item2">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOBeKDtiyB6Ayhjb9St-f-hrP8oY84jGj4pIGrec_qQA&usqp=CAU&ec=48665699" alt="login image">
+
+    </div>
+   </div>
+<a href="./login.html">Existing User- Login</a>
+<div id="error"></div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../public/signUp.js"></script>
+</body>
+</html>
