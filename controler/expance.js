@@ -12,12 +12,14 @@ exports.getData= (req, res)=>{
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
   
-  console.log(page, perPage, endIndex)
+  console.log(page, perPage)
 
   Expance.findAll({where:{userId:id}})
   .then(data=>{
     const paginatedExpenses=data.slice(startIndex, endIndex)
     res.json({
+      hasPrev:page>1,
+      hasNextpage:perPage*page<data.length,
       prevPage:page-1,
       currentPage:page,
       nextPage:page+1,

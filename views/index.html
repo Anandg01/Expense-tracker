@@ -5,60 +5,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <style>
-        #logout{
-            background:#f43e3e;
-        }
-       table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: center;
-}
-
-    </style>
+   <link rel="stylesheet" href="../public/index.css">
 </head>
-<button id="logout">LogOut</button>
+<button id="logout" class="btn" style="background: red;">LogOut</button>
 <body>
-    <form onsubmit="addexpance(event)">
-    <label for="expanceAmount">Choose Expance Amopunt</label>
-    <input type="number" id="expanceAmount">
-    <label for="Description"> Expance Description</label>
-    <input type="text" id="Description">
-    <label for="catagory">Choose The catagery </label>
-    <select name="catagery" id="catagory">
-        <option value="Food">Food</option>
-        <option value="Petrol">Petrol</option>
-        <option value="rent">Rent </option>
-        <option value="shoping">Shoping</option>
-    </select>
-    <button type="submit">Add Expance</button>
-    </form>
+    <h1 class="center">Expenses Tracker</h1>
+    <div class="container">
+        <div class="item item1">
+            <form onsubmit="addexpance(event)" class="form-container">
+                <label for="expanceAmount">Choose Expance Amopunt</label>
+                <input class="form-item" type="number" id="expanceAmount">
+                <label  for="Description"> Expance Description</label>
+                <input class="form-item" type="text" id="Description">
+                <label for="catagory">Choose The catagery </label>
+                <select class="form-item" name="catagery" id="catagory">
+                    <option value="Food">Food</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="rent">Rent </option>
+                    <option value="shoping">Shoping</option>
+                </select>
+                <button class="btn" type="submit">Add Expance</button>
+                </form>
+        </div>
+        <div class="item item2">
+            <div id="premium">
+                <button id="rozerpay">
+                    Buy premium
+                </button>     
+            </div> 
+            <div id="leader">
+                <h2 id="ledtit"></h2>
+            </div>
+        </div>
+    </div>
+   
     
-    <div id="premium">
-        <button id="rozerpay">
-            Buy premium
-        </button>     
-    </div> 
+   
     <button onclick="download()" id="downloadexpense">Download File</button>
     <button onclick="downloadAll()" id="downloadAllExpnse">Show all Download</button>
 <div>
     <h2>Expances</h2>
-    <table id="addTable">
+    <table id="addTable" class="Exptable">
 <tr>
     <th>Expance Amount</th>
     <th>Description</th>
     <th>catagery</th>
 </tr>
     </table>
+</div>
+<div class="center">
     <span id="pagination"></span>
+    <span id="setrow">
+        <select name="perPage" id="setrowExpance">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+    </span>
 </div>
-<div id="leader">
-    <h2 id="ledtit"></h2>
-</div>
+
 <div>
     <ol id="listof-file">
     </ol>

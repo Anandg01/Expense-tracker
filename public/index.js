@@ -1,4 +1,5 @@
-
+let page=1;
+let perPage=5;
 const token=localStorage.getItem('token')
 const premium=localStorage.getItem('premimum')
 
@@ -170,33 +171,32 @@ function downloadAll(){
 
 }
 
-function showpagination({prevPage, currentPage, nextPage}){
+function showpagination({ hasPrev,hasNextpage,prevPage, currentPage, nextPage}){
   pagination.innerHTML=''
-  console.log(prevPage, currentPage, nextPage)
-  if(prevPage){
+  if(hasPrev){
 const btn2=document.createElement('button')
 btn2.innerHTML=prevPage
-btn2.addEventListener('click',()=>getProducts(prevPage))
+btn2.addEventListener('click',()=>{page=prevPage; getProducts(prevPage)})
 pagination.appendChild(btn2)
   }
   const btn1=document.createElement('button')
 btn1.innerHTML=`<h1>${currentPage} </h1>`
 btn1.addEventListener('click',()=>getProducts(currentPage))
 pagination.appendChild(btn1)
-if(nextPage){
+if(hasNextpage){
   const btn3=document.createElement('button')
 btn3.innerHTML=nextPage
-btn3.addEventListener('click',()=>getProducts(nextPage))
+btn3.addEventListener('click',()=>{page=nextPage; getProducts(nextPage)})
 pagination.appendChild(btn3)
 }
-
 }
 
 function getProducts(page){
-  axios.get(`http://localhost:2000/allExpance?page=${page}`,{headers:{'Authorizan':token}})
+  axios.get(`http://localhost:2000/allExpance?page=${page}&perPage=${perPage}`,{headers:{'Authorizan':token}})
   .then(res=>{
+    const parant=document.getElementById('addTable');
+parant.innerHTML=`<tr><th>price</th><th>Description</th><th>category</th></tr>`
       const expance=res.data;
-      console.log(expance.perPage)
      expance.data.forEach((obj)=>{
       showOncreen(obj)
      })
@@ -204,3 +204,11 @@ function getProducts(page){
   })
   .catch(err=>console.log(err))
 }
+
+const selectElement = document.getElementById('setrowExpance');
+
+selectElement.addEventListener('change', () => {
+  const selectedValue = selectElement.value;
+  perPage=selectedValue;
+  getProducts(page, perPage)
+});

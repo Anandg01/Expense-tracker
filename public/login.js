@@ -32,4 +32,9 @@ const validate= await axios.post(`http://localhost:2000/user/login`,loginDetails
 function resetPasswaord(){
     window.location.href='./resetpassword.html'
   }
-  
+  document.addEventListener('DOMContentLoaded',()=>{
+    const token=localStorage.getItem('token')
+    if(token){
+        window.location.href='./index.html';
+    }
+  })

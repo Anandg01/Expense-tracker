@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const User=require('../models/user');
 const Forgotpassword=require('../models/resetpassword')
 
-Sib.ApiClient.instance.authentications['api-key'].apiKey ='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'
+Sib.ApiClient.instance.authentications['api-key'].apiKey =process.env.SIB_SEND_Mail_key;
 const tranEmailApi=new Sib.TransactionalEmailsApi()
 
 exports.forgotpassword= async (req, res)=>{
