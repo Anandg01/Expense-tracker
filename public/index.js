@@ -53,6 +53,7 @@ function addPremium(){
 function leaderBoard(){
   axios.get('http://localhost:2000/leaderbord').then(res=>{
     document.getElementById('ledtit').innerHTML='LeaderBoard'
+    document.getElementById('leader').innerHTML=``
   res.data.forEach(data=>{
     addleaderboard(data)
   })
@@ -162,6 +163,7 @@ function downloadAll(){
   axios.get('http://localhost:2000/allFileurl', { headers: {"Authorizan" : token} })
   .then(fileurl=>{
     const ul= document.getElementById('listof-file')
+    ul.innerHTML=``
     fileurl.data.forEach(data=>{
       const li=`<l1 id=${data.id} ><a href="${data.fileURL}">${data.id} </a>Expences</l1>`
      ul.innerHTML+=li;

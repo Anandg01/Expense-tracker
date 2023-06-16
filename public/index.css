@@ -1,0 +1,94 @@
+/*.container{
+    display: flex;
+}
+
+.item{
+    width: 50%;
+    height: 200px;
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-item{
+        width: 70%;
+        height: 23px;
+        border-radius: 0.5rem;
+        margin: 2px;
+}
+.btn{
+    width: 125px;
+    background: #88e478;
+    border-radius: 0.9rem;
+    height: 25px;
+    margin-top: 15px;
+}
+.Exptable{
+    text-align: center;
+    width: 100%;
+}
+.center{
+    text-align: center;
+}*/
+
+
+/* chat gpt*/
+
+.container {
+    display: flex;
+}
+
+.item {
+    width: 50%;
+    height: 200px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-item {
+    width: 70%;
+    height: 23px;
+    border-radius: 0.5rem;
+    margin: 2px;
+}
+
+.btn {
+    width: 125px;
+    background: #88e478;
+    border-radius: 0.9rem;
+    height: 25px;
+    margin-top: 15px;
+}
+
+.Exptable {
+    text-align: center;
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Media Query for screens with a maximum width of 600px */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .item {
+        width: 100%;
+    }
+    
+    .form-item {
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
