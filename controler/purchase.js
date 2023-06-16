@@ -6,8 +6,8 @@ exports.premiumParchase=async (req, res)=>{
     console.log(req.user.id)
     try{
 const rzp=new rozerpay({
-    key_id:'rzp_test_8nlK31tkHx2aN1',
-    key_secret:'PnbxKTo0cKdK5nFhfPBiHfZf'
+    key_id:process.env.RZP_Key_Id,
+    key_secret:process.env.RZP_SECRET_Key
 })
 const amount=5000;
  rzp.orders.create({amount,currency:'INR'},(err,order)=>{

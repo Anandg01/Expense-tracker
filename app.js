@@ -1,4 +1,7 @@
 const express=require('express')
+
+require('dotenv').config();
+
 const sequelize=require('./util/database')
 const userRout=require('./router/user')
 const resetpasword=require('./router/resetpassword')
@@ -17,7 +20,6 @@ const Forgotpassword=require('./models/resetpassword')
 const fileUrl=require('./models/downloadFileurl')
 app.use(cors())
 app.use(helmet())
-require('dotenv').config();
 
 const accessLogStream=fs.createWriteStream(
     path.join(__dirname, 'access.log'),
@@ -55,4 +57,4 @@ sequelize
 .then((res)=>{
     app.listen(process.env.Port_name,()=>console.log('server Running... '))
 })
-.catch((err)=>console.log(err))
+.catch((err)=>console.log(err,process.env.DB_HOST))

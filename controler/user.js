@@ -1,5 +1,4 @@
 const user=require('../models/user')
-const { use } = require('../router/user')
 const jwt = require('jsonwebtoken');
 
 const bcrypt=require('bcrypt')
@@ -26,7 +25,7 @@ exports.postData =async (req, res)=>{
 }
 
 function generatToken(id){
-    return jwt.sign({userId:id},'854215f63ef23342')
+    return jwt.sign({userId:id},process.env.JWT_Token)
   }
 
 exports.login=async (req, res)=>{
