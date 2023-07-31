@@ -1,5 +1,5 @@
 const express=require('express')
-const resstControler=require('../controler/resetpasswor')
+const resstControler=require('../controller/resetpasswor')
 const rout=express.Router();
 
 rout.post('/forgetpassword',resstControler.forgotpassword)

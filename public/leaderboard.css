@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  nav {
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .logo img {
+    height: 40px; /* Adjust the height of the logo as needed */
+  }
+  
+  .logo h1 {
+    color: #fff;
+    font-size: 24px;
+    margin-left: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    margin: 0 15px;
+    padding: 10px 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  /* Hover effect */
+  li:hover {
+    background-color: #555;
+  }
+  
+  /* Active effect */
+  li.active {
+    background-color: #777;
+  }
+  

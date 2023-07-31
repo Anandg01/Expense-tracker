@@ -1,9 +1,15 @@
-const Expance=require('../models/expance')
+const Expance=require('../models/expence')
 const User=require('../models/user')
 const FileUrlTable=require('../models/downloadFileurl')
 const sequelize=require('../util/database')
 const s3Service=require('../services/s3services')
-
+//for checking
+exports.alldata=(req, res)=>{
+Expance.findAll({where:{userId:1}}).then(rec=>{
+  res.send(rec)
+}
+)
+}
 
 exports.getData= (req, res)=>{
   const id=req.user.id;
@@ -42,18 +48,18 @@ function validString(string){
 exports.addExpance=async (req, res)=>{
   const t= await sequelize.transaction()
 
-    let {expAmount,description,catagory,userId}=req.body;
-       userId=req.user.id;
-       if(expAmount==undefined||validString(description)||validString(catagory)){
+    let {amount,description,catagory,date}=req.body;
+     const userId=req.user.id;
+       if(amount==undefined||validString(description)||validString(catagory)){
       return res.status(401).json({message:'Something went wrong',success:false})
        }
-
+    console.log("jy ho")
        try{
-        const data=await Expance.create({expAmount,description,catagory,userId},{transaction:t})
-      const totalexpance=Number(req.user.totalexpance)+Number(expAmount)
-      console.log(totalexpance)
+        const data=await Expance.create({amount,description,catagory,userId,date},{transaction:t})
+      const totalexpences=Number(req.user.totalexpences)+Number(amount)
+      console.log(totalexpences,"==========")
        await User.update({
-        totalexpance:totalexpance
+        totalexpences:totalexpences
            },{
             where:{id:req.user.id},
             transaction:t
@@ -103,8 +109,8 @@ exports.download= async (req, res)=>{
   const user=req.user;
 
   try{
-  const expance= await user.getExpances()
-  const stringExpance=JSON.stringify(expance)
+  const expence= await user.getExpances()
+  const stringExpance=JSON.stringify(expence)
 console.log(user.id)
   const userid=user.id;
 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="../public//nav&tabel.css">
+    <style>
+   .container {
+          margin: 15px;
+          display: flex;
+      }
+      .item {
+          width: -webkit-fill-available;
+          height: 200px;
+          border: 2px solid #b1bbc6;
+      }
+      .item1 {
+          width: 25%;
+      }
+      .formContaner {
+          display: flex;
+          flex-direction: column;
+      }
+      .dateBtn {
+          margin-top: 11px;
+          width: 43%;
+          height: 30px;
+          color: white;
+          border: 0px;
+          cursor: pointer;
+          border-radius: 0.5rem;
+          background: #1889ec;
+      }
+      .dateBtn:hover{
+          background: #03203a;
+      }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navBar">
+            <div class=" item2">
+                <ul>
+                    <li>
+                        <a href="/index.html">HOME</a>
+                    </li>
+                    <li>
+                        <a href="/reports.html">Reports</a>
+                    </li>
+                    <li>
+                        <a href="/leaderboard.html">leaderBoard</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="item2">
+                <ul>
+                    <li><button id="byPremimum" class="btnNT">Buy Premimum</button></li>
+                    <li><button id="logout" class="btnNT">Log Out</button></li>
+
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="item item1">
+
+            <h3 style="text-align: center;">DAILY REPORTS</h3>
+            <form id="dayForm" class="formContaner">
+                <label for="date" class="dayDate"> Select Date</label>
+                <input type="date" class="dayDate" id="date" />
+                <button id="dateShowBtn" type="submit" class="dateBtn">Show</button>
+            </form>
+
+        </div>
+        <div class="item2 item" style="overflow-y: auto;">
+            <table id="dateTable" class="tb">
+
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>catagery</th>
+                    <th>Expance Amount</th>
+                </tr>
+            </table>
+            <h3></h3>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="item item1">
+            <h3 style="text-align: center;">MONTHLY REPORTS</h3>
+            <form id="monthForm" class="formContaner">
+                <label for="month" class="dayDate"> Select Date</label>
+                <input type="month" class="dayDate" id="month" />
+                <button id="MonthShowBtn" type="submit" class="dateBtn">Show</button>
+            </form>
+
+        </div>
+        <div class="item item2" style="overflow-y: auto;">
+            <table id="monthTabel" class="tb">
+
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>catagery</th>
+                    <th>Expance Amount</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../public/reports.js"></script>
+</body>
+
+</html>

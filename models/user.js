@@ -23,7 +23,7 @@ const user=sequelize.define('user',{
         alowNull:false,
     },
     ispremiumuser:Sequelize.BOOLEAN,
-    totalexpance:{
+    totalexpences:{
         type:Sequelize.INTEGER,
         defaultValue:0
     }

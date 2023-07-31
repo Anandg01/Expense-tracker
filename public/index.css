@@ -1,40 +1,3 @@
-/*.container{
-    display: flex;
-}
-
-.item{
-    width: 50%;
-    height: 200px;
-}
-.form-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.form-item{
-        width: 70%;
-        height: 23px;
-        border-radius: 0.5rem;
-        margin: 2px;
-}
-.btn{
-    width: 125px;
-    background: #88e478;
-    border-radius: 0.9rem;
-    height: 25px;
-    margin-top: 15px;
-}
-.Exptable{
-    text-align: center;
-    width: 100%;
-}
-.center{
-    text-align: center;
-}*/
-
-
-/* chat gpt*/
-
 .container {
     display: flex;
 }
@@ -42,12 +5,18 @@
 .item {
     width: 50%;
     height: 200px;
+    border: 2px solid red;
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#leader{
+    border: 2px solid black;
+    overflow: auto;
 }
 
 .form-item {
@@ -92,3 +61,54 @@
         width: 100%;
     }
 }
+
+
+.user-account{
+    float: right;
+   width: 180px;
+   height: 100px;
+   background: #f4baba;
+   border: 1px solid whitesmoke;
+   border-radius: 0.5rem;
+  }
+  .user-info{
+      margin-top: 16px;
+      margin-left: 10px;
+      overflow: auto;
+  }
+  .lgbtn{
+      margin: 11px 46px ;
+      cursor: pointer;
+
+    }
+  .user-info .fas{
+          margin-top: 6px;
+          margin-left: 3px;
+      }
+     .user-info .email{
+      margin-left: 9px;
+     }
+    .user-info .username {
+      margin-left: 4px;
+     }
+     .navBar{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+     height: 35px;
+      background: #db6363;
+     }
+     .nav-item{
+    border: 1px solid palegreen;
+    cursor: pointer;
+    font-weight: bold;
+     }
+     .nav-item:active{
+      color: red;
+      background: #f4baba;
+     }
+     
+     #overlay{
+      display: none;
+     }

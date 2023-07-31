@@ -1,6 +1,5 @@
 const rozerpay=require('razorpay')
 const Order=require('../models/orders');
-const { json } = require('sequelize');
 
 exports.premiumParchase=async (req, res)=>{
     console.log(req.user.id)
@@ -9,6 +8,7 @@ const rzp=new rozerpay({
     key_id:process.env.RZP_Key_Id,
     key_secret:process.env.RZP_SECRET_Key
 })
+console.log((rzp))
 const amount=5000;
  rzp.orders.create({amount,currency:'INR'},(err,order)=>{
     if(err){

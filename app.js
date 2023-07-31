@@ -12,14 +12,16 @@ const cors=require('cors')
 const helmet=require('helmet')
 const morgan=require('morgan')
 const app=express();
+app.use(cors())
+
 const User=require('./models/user')
-const Expance=require('./models/expance')
+const Expance=require('./models/expence')
 const order=require('./models/orders')
-const expanceRout=require('./router/expance')
+const expanceRout=require('./router/expence')
 const Forgotpassword=require('./models/resetpassword')
 const fileUrl=require('./models/downloadFileurl')
-app.use(cors())
-app.use(helmet())
+//app.use(helmet())
+
 
 const accessLogStream=fs.createWriteStream(
     path.join(__dirname, 'access.log'),
@@ -30,15 +32,28 @@ app.use(morgan('combined',{stream:accessLogStream}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const premiumRout=require('./router/premium')
 
 app.use('/user',userRout)
 app.use('/password',resetpasword)
-
+app.use(premiumRout)
 app.use(expanceRout)
+
+app.use('/',(req, res)=>{
+   // res.sendFile(path.join(__dirname,`views/${req.url}`))
+    if (req.url.endsWith('.html')) {
+        res.sendFile(path.join(__dirname,'views',req.url))
+    }
+    else{
+        res.sendFile(path.join(__dirname,req.url))
+    }
+})
+
+/*
 app.use((req, res)=>{
     res.send(`<h1>Not a page</h1>`)
 })
-
+*/
 User.hasMany(Expance);
 Expance.belongsTo(User)
 

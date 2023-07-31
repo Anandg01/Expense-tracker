@@ -5,9 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    <link rel="stylesheet" href="../public/index.css">
+   <link rel="stylesheet" href="../public//nav&tabel.css">
+
 </head>
-<button id="logout" class="btn" style="background: red;">LogOut</button>
+<!-- kjhkjh -->
+<header>
+    <div class="navBar">
+        <div class=" item2">
+            <ul>
+                <li>
+                    <a href="/index.html">HOME</a>
+                </li>
+                <li>
+                    <a id="reportKey" href="#" onclick="onClickAlert()">Reports</a>
+                </li>
+                <li>
+                    <a id="leaderBordKey" href="#" onclick="onClickAlert()">leaderBoard</a>
+                </li>
+            </ul>
+        </div>
+        <div class="item2">
+            <ul>
+                <li><button id="rozerpay" class="btnNT">Buy Premimum</button></li>
+                <li><button id="logout" class="btnNT">Log Out</button></li>
+
+            </ul>
+        </div>
+    </div>
+</header>
+<!-- hedd -->
+
 <body>
     <h1 class="center">Expenses Tracker</h1>
     <div class="container">
@@ -28,7 +57,7 @@
                 </form>
         </div>
         <div class="item item2">
-            <div id="premium">
+            <!-- <div id="premium">
                 <button id="rozerpay">
                     Buy premium
                 </button>     
@@ -36,7 +65,7 @@
             <div>
                 <p class="center" id="ledtit"></p>
                 <ul id="leader"></ul>
-            </div>
+            </div> -->
         </div>
     </div>
    
@@ -48,9 +77,11 @@
     <h2>Expances</h2>
     <table id="addTable" class="Exptable">
 <tr>
+    <th>Date</th>
     <th>Expance Amount</th>
     <th>Description</th>
     <th>catagery</th>
+    <th>Action</th>
 </tr>
     </table>
 </div>
@@ -74,5 +105,10 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../public/index.js"></script>
+    <script>
+        function onClickAlert(){
+            alert("It only for Premimum User")
+        }
+    </script>
 </body>
 </html>

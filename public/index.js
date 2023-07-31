@@ -4,14 +4,26 @@ const token=localStorage.getItem('token')
 const premium=localStorage.getItem('premimum')
 
 const pagination=document.getElementById('pagination')
+
 function addexpance(e){
     e.preventDefault();
-    console.log(e.target.Description.value)
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+   const month = currentDate.getMonth()+1;
+    const year = currentDate.getFullYear();
+console.log(currentDate,day, "month", month,year)
+    // add leading zeros to day and month if needed
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+
+    // create the date string in date-month-year format
+
+    const dateStr = `${formattedDay}-${formattedMonth}-${year}`;
     const expanceDetais={
-        expAmount:e.target.expanceAmount.value,
+        amount:e.target.expanceAmount.value,
         description:e.target.Description.value,
         catagory:e.target.catagory.value,
-        userId:1
+        date:dateStr
     }
   //showOncreen(expanceDetais)
 const validate=axios.post(`http://localhost:2000/addExpance `,expanceDetais,{headers:{'Authorizan':token}})
@@ -28,7 +40,7 @@ function showOncreen(obj){
   document.getElementById('expanceAmount').value='';
   document.getElementById('Description').value='';
     const parant=document.getElementById('addTable');
-    const table=`<tr id='${obj.id}'> <td>${obj.expAmount}</td> <td>${obj.description} </td> <td>${obj.catagory} </td> <td> <button onclick="deleteClick(${obj.id})">Delete Expance</button></td> </tr>`
+    const table=`<tr id='${obj.id}'> <td>${obj.date}</td> <td>${obj.amount}</td> <td>${obj.description} </td> <td>${obj.catagory} </td> <td> <button class='btn' onclick="deleteClick(${obj.id})">Delete Expance</button></td> </tr>`
    parant.innerHTML+=table;
 }
 
@@ -50,41 +62,56 @@ function addPremium(){
    <button id="leaderbtn" onclick="leaderBoard()">LeaderBoard</button>`
 }
 
-function leaderBoard(){
-  axios.get('http://localhost:2000/leaderbord').then(res=>{
-    document.getElementById('ledtit').innerHTML='LeaderBoard'
-    document.getElementById('leader').innerHTML=``
-  res.data.forEach(data=>{
-    addleaderboard(data)
-  })
-  })
-  .catch(err=>console.log(err))
-  }
+// function leaderBoard(){
+//   axios.get('http://localhost:2000/leaderbord').then(res=>{
+//     document.getElementById('ledtit').innerHTML='LeaderBoard'
+//     document.getElementById('leader').innerHTML=``
+//   res.data.forEach(data=>{
+//     addleaderboard(data)
+//   })
+//   })
+//   .catch(err=>console.log(err))
+//   }
 
-function addleaderboard(obj){
-  const prNode=document.getElementById('leader');
-  const li=`<li>Name- ${obj.name}, Total Expance :${obj.totalexpance} </li>`
-  prNode.innerHTML+=li;
-}
-// show all expance when reset
+// function addleaderboard(obj){
+//   const prNode=document.getElementById('leader');
+//   const li=`<li>Name- ${obj.name}, Total Expance :${obj.totalexpance} </li>`
+//   prNode.innerHTML+=li;
+// }
+// show all expence when reset
 
 document.addEventListener('DOMContentLoaded',()=>{
-  if(premium==='true'){
-    //console.log(premium)
-   addPremium();
+ axios.get('/checkpremimum',{headers:{'Authorizan':token}})
+ .then(res=>{
+  console.log(res.data)
+  if(res.data[0].ispremiumuser){
+    console.log('true')
+   const reportBtn=document.getElementById('reportKey')
+   reportBtn.removeAttribute('onclick')
+   reportBtn.setAttribute("href","reports.html")
+   const ldrbtn=document.getElementById('leaderBordKey')
+   ldrbtn.removeAttribute('onclick')
+   ldrbtn.setAttribute("href","/leaderboard.html")
+   document.getElementById('rozerpay').innerText="Premimum User"
   }
+  else{
+    console.log(false)
+  }
+ })
+ .catch(err=>console.log(err))
+
   if(!token){
     window.location.href='./login.html';
   }
     axios.get(`http://localhost:2000/allExpance?page=1`,{headers:{'Authorizan':token}})
     .then(res=>{
-        const expance=res.data;
-        console.log(expance.total)
-      expance.data.forEach(element=>{
+        const expence=res.data;
+        console.log(expence.total)
+      expence.data.forEach(element=>{
             showOncreen(element)
         })
-        console.log(expance)
-        showpagination(expance)
+        console.log(expence)
+        showpagination(expence)
     })
     .catch(err=>console.log(err))
 })
@@ -197,12 +224,12 @@ function getProducts(page){
   axios.get(`http://localhost:2000/allExpance?page=${page}&perPage=${perPage}`,{headers:{'Authorizan':token}})
   .then(res=>{
     const parant=document.getElementById('addTable');
-parant.innerHTML=`<tr><th>price</th><th>Description</th><th>category</th></tr>`
-      const expance=res.data;
-     expance.data.forEach((obj)=>{
+parant.innerHTML=`<tr><th>Date</th><th>Expance Amount</th><th>Description</th><th>catagery</th><th>Action</th> </tr>`
+      const expence=res.data;
+     expence.data.forEach((obj)=>{
       showOncreen(obj)
      })
-      showpagination(expance)
+      showpagination(expence)
   })
   .catch(err=>console.log(err))
 }

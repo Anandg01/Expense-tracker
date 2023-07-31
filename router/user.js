@@ -1,5 +1,5 @@
 const express=require('express')
-const userControler=require('../controler/user')
+const userControler=require('../controller/user')
 const router=express.Router();
 router.post("/signUp",userControler.postData)
 router.get('/get',userControler.getData)

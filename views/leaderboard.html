@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leaderBoard</title>
+    <link rel="stylesheet" href="../public//nav&tabel.css">       
+</head>
+<body>
+
+    <header>
+        <div class="navBar">
+            <div class=" item2">
+             <ul>
+                <li>
+                    <a href="/index.html">HOME</a>
+                </li>
+                <li>
+                    <a href="/reports.html">Reports</a>
+                </li>
+                <li>
+                    <a href="/leaderboard.html">leaderBoard</a>
+                </li>
+             </ul>
+            </div>
+            <div class="item2">
+                <ul>
+                    <li><button id="byPremimum" class="btn">Buy Premimum</button></li>
+                    <li><button id="logout" class="btn">Log Out</button></li>
+                  
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div>
+    <h1 style="text-align: center; background: whitesmoke; color: chocolate;">LEADERBOARD</h1>    
+    </div>
+    <div>
+        <ul id="leader"></ul>
+        <table id="lBtabel" class="Exptable">
+            <tr>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Expences</th>
+            </tr>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../public/leaderBoard.js"></script>
+</body>
+</html>

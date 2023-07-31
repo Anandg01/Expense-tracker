@@ -38,6 +38,54 @@
       cursor: pointer;
       display: inline;
     }*/
+    header .navBar {
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 3px 0 7px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 100;
+      transition: all .3s ease-in-out;
+  }
+  
+  .navBar{
+      display: flex;
+      justify-content: space-between;
+      line-height: 50px;
+  }
+  
+ .navBar .item1{
+      width: 50px;
+      height: 23px;
+      background: rebeccapurple;
+      align-self: center;
+  }
+  
+  .navBar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navBar ul li {
+    margin-right: 10px;
+  }
+  
+  .navBar ul li a {
+      padding: 20px;
+      margin: 20px;
+    color:#000000;
+    text-decoration: none;
+  }
+  .navBar ul li a:hover{
+  font-weight: bold;
+  color: red;
+  }
+
+ li .active{
+  font-weight: bold;
+    background: #2196f3;
+  }
 
     .container {
       display: flex;
@@ -100,5 +148,8 @@
       .btn {
         width: 100%;
       }
+      /* .item2{
+        display: none;
+      } */
     }
     
